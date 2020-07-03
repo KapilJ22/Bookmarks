@@ -1,4 +1,5 @@
 import commands
+import json
 
 
 class Option:
@@ -20,7 +21,7 @@ class Option:
 def print_options(options):
     for shortcut, option in options.items():
         print(f'({shortcut}) {option}')
-    print()
+    print("test")
 
 
 # def option_choice_is_valid(choice, options):
@@ -50,6 +51,10 @@ def get_new_bookmark_data():
     }
 
 
+def get_github_user():
+    return get_user_input("GitHub UserName", required=True)
+
+
 def input_choice():
     choice = input('Choose an option: ')
     while choice not in options:
@@ -67,6 +72,7 @@ if __name__ == '__main__':
         # 'T': Option('List bookmarks by title',
         #             commands.ListBookmarksCommand(order_by='title')),
         # 'D': Option('Delete a bookmark', commands.DeleteBookmarkCommand()),
+        'G': Option('github stars', commands.starGithubRepoCommand, get_github_user),
         'Q': Option('Quit', commands.QuitCommand)
     }
     print_options(options)
