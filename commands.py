@@ -4,6 +4,9 @@ import sys
 import requests
 import pprint
 import json
+from exceptions import InvalidGithubUser
+from unittest import mock
+import unittest
 
 db = DatabaseManager('bookmark.db')
 
@@ -31,7 +34,14 @@ def ListBookmarksCommand(orderBy='date_added'):
 
 
 def starGithubRepoCommand(github_username):
-    response = requests.get('https://api.github.com/users/KapilJ22/starred')
+    try:
+        response = requests.get(
+            'https://api.github.com/users/KapilJ22/starred')
+        # raise InvalidGithubUser(github_username)
+    except InvalidGithubUser as e:
+        print("caught and thrown again")
+        raise
+
     print(response.links)
     # return pprint.pformat(response.json())
     # print(json.dumps(response, indent=4, sort_keys=True))
@@ -49,3 +59,21 @@ def starGithubRepoCommand(github_username):
 
 def QuitCommand():
     sys.exit()
+
+
+# class RmTestCase(unittest.TestCase):
+#     @mock.patch('add')
+#     # data = dict()
+#     def test_AddBookmarkCommand(self, mock_db):
+#         data = {'title': 'kapil',
+#                 'url': 'wwww',
+#                 'notes': 'test ',
+#                 'date_added': datetime.utcnow().isoformat()}
+#         AddBookmarkCommand(data)
+#         # self.assertTrue(mock_db.called)
+#         mock_db.assert_called_with('bookmarks', data)
+#         # self.assertEqual('Bookmark added!', c.AddBookmarkCommand(data))
+
+
+# if __name__ == '__main__':
+#     unittest.main()

@@ -1,0 +1,2 @@
+class InvalidGithubUser(Exception):
+    pass
