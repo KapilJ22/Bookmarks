@@ -2,3 +2,4 @@ pizza
 chai
 fries
 water
+opened new rest
