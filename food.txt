@@ -1,2 +1,6 @@
 pizza
+<<<<<<< HEAD
 chai
+=======
+fries
+>>>>>>> origin/master
